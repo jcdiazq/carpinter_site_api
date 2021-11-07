@@ -12,6 +12,16 @@ services:
     ports:
       - 3306:3306
 
+  siteFtp:
+    image: docker.io/stilliard/pure-ftpd
+    environment:
+      - FTP_USER_NAME=bob
+      - FTP_USER_PASS=12345
+      - FTP_USER_HOME=/home/bob
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009"
+
   myapp:
     tty: true
     image: docker.io/bitnami/laravel:8
@@ -22,8 +32,9 @@ services:
       - DB_PASSWORD=my_password
     depends_on:
       - mariadb
+      - siteFtp
     ports:
-      - 3000:3000
+      - 8080:3000
     volumes:
       - ./:/app
     # privileged: true # Privileged mode could be required to run this container under Windows

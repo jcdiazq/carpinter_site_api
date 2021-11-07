@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\PhotoController;
+use App\Http\Controllers\FtpController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('getAll', [PhotoController::class, 'showAll']);
+Route::get('getAllFileName', [FtpController::class, 'getAllFileName']);
