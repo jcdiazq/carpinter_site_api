@@ -18,15 +18,14 @@ class FtpController extends Controller
     {
         try{
             $this->ftp = Storage::createFtpDriver([
-                'driver' => 'ftp',
+                'driver' => env('FTP_DRIVE'),
                 'host' => env('FTP_HOST'),
                 'username' => env('FTP_USERNAME'),
                 'password' => env('FTP_PASSWORD'),
                 'port' => env('FTP_PORT'),
                 'passive' => env('FTP_PASSIVE'),
-                'ignorePassiveAddress' => true,
+                'ignorePassiveAddress' => env('FTP_IGNOREPASSIVEADDRESS'),
             ]);
-            // $this->ftp->ftp_connect();
         }
         catch(Exception $e){
             return 'Error en la conexión con el FTP'. $e->getMessage();

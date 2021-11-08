@@ -29,7 +29,7 @@ class PhotoController extends ResponseBaseController
 
         $connectionFtp = New FtpController;
         $message = '';
-        $resultPutFileOnFtp = $connectionFtp->PutFileOnFtp($request->fileName, $message);
+        $resultPutFileOnFtp = $connectionFtp->PutFileOnFtp($request->path, $request->fileName, $message);
         if (!$resultPutFileOnFtp) {
             return $this->sendError('Error Save Photo', ['error'=>'Error in Photo Storage', 'exception'=>$message]);
         }
