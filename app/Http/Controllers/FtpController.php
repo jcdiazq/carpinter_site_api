@@ -34,7 +34,7 @@ class FtpController extends Controller
 
     public function getAllFileName(){
         try {
-            $fileNameArray = $this->ftp->allFiles();
+            $fileNameArray = $this->ftp->allFiles('images');
             return 'Recovery Files: '. implode(",", $fileNameArray);
         } catch (Exception $e) {
             return 'Wrong Trying Recovery Files'. $e->getMessage();
@@ -43,7 +43,7 @@ class FtpController extends Controller
 
     public function PutFileOnFtp($filePath, $fileName, $contents, &$message=''){
         try {
-            $path = $filePath.$fileName;
+            $path = Utils::JoinPaths($filePath,$fileName);
             if ($this->ftp->put($path, $contents)) {
                 return true;
             }else {
@@ -57,8 +57,8 @@ class FtpController extends Controller
 
     public function FtpDeleteFile($filePath, $fileName, &$message=''){
         try {
-            $path = $filePath.$fileName;
-            if ($this->ftp->exists($path)) {
+            $path = Utils::JoinPaths($filePath,$fileName);
+            if (!$this->ftp->exists($path)) {
                 throw new Exception("Error File Not Found in Storege", 1);
             }
             if ($this->ftp->delete($path)) {

@@ -20,5 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('getAll', [PhotoController::class, 'showAll']);
-Route::get('getAllFileName', [FtpController::class, 'getAllFileName']);
+Route::get('getAll', [PhotoController::class, 'ShowAll']);
+Route::get('getPhotoNames', [FtpController::class, 'getAllFileName']);
+Route::get('deletePhoto/{id}', [PhotoController::class, 'DeletePhoto']);
