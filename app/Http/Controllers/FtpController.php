@@ -12,13 +12,12 @@ use function GuzzleHttp\Promise\exception_for;
 class FtpController extends Controller
 {
     private $ftp;
-    private $filePath = '/images';
 
     public function __construct()
     {
         try{
             $this->ftp = Storage::createFtpDriver([
-                'driver' => env('FTP_DRIVE'),
+                'driver' => env('FTP_DRIVER'),
                 'host' => env('FTP_HOST'),
                 'username' => env('FTP_USERNAME'),
                 'password' => env('FTP_PASSWORD'),
